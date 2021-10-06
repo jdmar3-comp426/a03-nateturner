@@ -49,8 +49,8 @@ export function maxAndMin(numbers) {
             large = numbers[i];
         }
     }
-    var dict = {max : large,
-    min : small
+    var dict = {max : parseInt(large),
+    min : parseInt(small)
     };
     return dict;
 }
