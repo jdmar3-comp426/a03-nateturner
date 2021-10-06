@@ -49,7 +49,10 @@ export function maxAndMin(numbers) {
             large = numbers[i];
         }
     }
-    return {max: large, min: small};
+    var dict = {max : large,
+    min : small
+    };
+    return dict;
 }
 
 /**
