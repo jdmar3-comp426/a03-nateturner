@@ -43,10 +43,10 @@ export function maxAndMin(numbers) {
     let large = numbers[0];
     for (let i = 1; i < numbers.length; i++){
         if(numbers[i]<small){
-            let small = numbers[i];
+            small = numbers[i];
         }
         if(numbers[i]>large){
-            let large = numbers[i];
+            large = numbers[i];
         }
     }
     return {max: large, min: small};
