@@ -8,7 +8,11 @@ import {variance} from "./data/stats_helpers.js";
  * prototype functions. Very useful
  */
 export function getSum(array) {
-
+    var n = 0;
+    for (let i = 0; i < array.length; i++){
+        n+=array[i];
+    }
+    return n
 }
 
 
