@@ -6,9 +6,11 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   let key = `type: '${typeof variable}'`;
-   let value = `value: '${variable}'`;
-   var dict = {key, value};
+   //let key = `type: '${typeof variable}'`;
+   //let value = `value: '${variable}'`;
+   let type = typeof variable;
+   let value = variable;
+   var dict = {type,value};
    return dict;
 }
 
@@ -106,7 +108,7 @@ export function removeKeys(object, keyList) {
    var item = {};
    const k = Object.keys(object);
    for (let i = 0; i < k.length; i++){
-      var add = True;
+      var add = true;
       for (let j = 0; j < keyList.length; j++){
          if(k[i]===keyList[j]){
             var add = False;
