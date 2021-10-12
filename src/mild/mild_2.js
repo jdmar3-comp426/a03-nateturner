@@ -6,7 +6,10 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   return `type: '${typeof variable}'`, `value: ${variable}`;
+   let key = `type: '${typeof variable}'`;
+   let value = `value: '${variable}'`;
+   var dict = {key, value};
+   return dict;
 }
 
 
@@ -69,7 +72,7 @@ export function removeKey(object, key) {
  */
 export function removeKeyNonDestructive(object, key) {
    var item = {};
-   const k = object.keys();
+   const k = Object.keys(object);
    for (let i = 0; i < k.length; i++){
       if(k[i]!==key){
          item[k[i]]=object[k[i]];
@@ -101,7 +104,7 @@ export function removeKeyNonDestructive(object, key) {
  */
 export function removeKeys(object, keyList) {
    var item = {};
-   const k = object.keys();
+   const k = Object.keys(object);
    for (let i = 0; i < k.length; i++){
       var add = True;
       for (let j = 0; j < keyList.length; j++){
