@@ -29,11 +29,10 @@ export function identifyVariable(variable) {
 
  */
 export function identifyArray(array) {
-   const a = [];
    for (let i = 0; i < array.length; i++){
-      a[i] = identifyVariable(array[i]);
+      array[i] = identifyVariable(array[i]);
    }
-   return a;
+   return array;
 }
 
 /**
