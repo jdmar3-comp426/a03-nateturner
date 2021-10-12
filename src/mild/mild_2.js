@@ -31,7 +31,7 @@ export function identifyVariable(variable) {
 export function identifyArray(array) {
    const a = [];
    for (let i = 0; i < array.length; i++){
-      a.push(identifyVariable(array[i]));
+      a[i] = identifyVariable(array[i]);
    }
    return a;
 }
@@ -111,7 +111,7 @@ export function removeKeys(object, keyList) {
       var add = true;
       for (let j = 0; j < keyList.length; j++){
          if(k[i]===keyList[j]){
-            var add = False;
+            var add = false;
          }
       }
       if (add){
