@@ -1,4 +1,5 @@
 import {variance} from "./data/stats_helpers.js";
+import {maxAndMin} from "../mild/mild_1.js"
 
 /**
  * Gets the sum of an array of numbers.
@@ -54,7 +55,13 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-    
-    return []
+    let max_min = maxAndMin(array);
+    let sum = getSum(array);
+    let ave = sum/array.length;
+    var vari = variance(array, ave);
+    var std_dev = Math.sqrt(vari);
+    var med = getMedian(array);
+    var dict = {length: array.length, mean: ave,  median: med, min: max_min["min"], max: max_min["max"], variance: vari, standard_deviation: std_dev};
+    return dict;
 }
 
