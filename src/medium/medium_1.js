@@ -56,12 +56,12 @@ export function getMedian(array) {
  */
 export function getStatistics(array) {
     let max_min = maxAndMin(array);
-    let sum = getSum(array);
+    let s = getSum(array);
     let ave = sum/array.length;
     var vari = variance(array, ave);
     var std_dev = Math.sqrt(vari);
     var med = getMedian(array);
-    var dict = {length: array.length, mean: ave,  median: med, min: max_min["min"], max: max_min["max"], variance: vari, standard_deviation: std_dev};
+    var dict = {length: array.length, sum: s, mean: ave,  median: med, min: max_min["min"], max: max_min["max"], variance: vari, standard_deviation: std_dev};
     return dict;
 }
 
