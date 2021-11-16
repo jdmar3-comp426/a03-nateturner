@@ -20,41 +20,11 @@ see under the methods section
  *
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
-function avg_city(){
-    var sum = 0;
-    for (var i = 0; i < mpg_data.length; i++){
-        sum+=mpg_data[i].city_mpg;
-    } 
-    return sum/mpg_data.length;
-}
-function avg_highway(){
-    var sum = 0;
-    for (var i = 0; i < mpg_data.length; i++){
-        sum+=mpg_data[i].highway_mpg;
-    } 
-    return sum/mpg_data.length;
-}
-function get_years(){
-    const years = [];
-    for (var i = 0; i < mpg_data.length; i++){
-        years.push(mpg_data[i].year);
-    }
-    return years
-}
-function get_hybrids(){
-    var num = 0;
-    for (var i = 0; i < mpg_data.length; i++){
-        if(mpg_data[i].hybrid == true){
-            num+=1
-        }
-    }
-    return num/mpg_data.length
-}
 
 export const allCarStats = {
-    avgMpg: {city: avg_city(), highway:avg_highway()},
-    allYearStats: getStatistics(get_years()),
-    ratioHybrids: get_hybrids(),
+    avgMpg: {city: mpg_data.flatMap(x=>x["city_mpg"]).reduce((previousValue, currentValue)=>previousValue+currentValue)/mpg_data.length, highway: mpg_data.flatMap(x=>x["highway_mpg"]).reduce((previousValue, currentValue) => previousValue+currentValue)},
+    allYearStats: getStatistics(mpg_data.flatMap(x=>x["year"])),
+    ratioHybrids: mpg_data.flatMap(x=>x["hybrid"]).filter(x=>x==true).length/mpg_data.length,
 };
 
 
@@ -115,7 +85,45 @@ export const allCarStats = {
  *
  * }
  */
+// flatMap(x => x["id"]).filter(x=>)
+//
+function getMakerHybrids(){
+    const m = new Set(mpg_data.flatMap(x => x["make"]));
+    const l = [...m];
+    const r = [];
+    for(var i = 0; i < l.length; i++){
+        let hybrids = mpg_data.filter(x=>x["hybrid"]==true).filter(x=>x["make"]==l[i]).flatMap(x => x["id"]);
+        if(hybrids.length>0){
+            var dict = {};
+            dict["make"] = l[i];
+            dict["hybrids"] = hybrids;
+            r.push(dict);
+        }
+    }
+    return r;
+}
+
+function getAvgByYandH(){
+    const m = new Set(mpg_data.flatMap(x => x["year"]));
+    const l = [...m];
+    const r = {};
+    for(var i = 0; i < l.length; i++){
+        var diff = {};
+        let hybrids_city = mpg_data.filter(x=>x["hybrid"]==true).filter(x=>x["year"]==l[i]).flatMap(x=>x["city_mpg"]);
+        var h_c_m = hybrids_city.reduce((previousValue,currentValue)=>previousValue+currentValue)/hybrids_city.length;
+        let hybrids_highway = mpg_data.filter(x=>x["hybrid"]==true).filter(x=>x["year"]==l[i]).flatMap(x=>x["highway_mpg"]);
+        var h_h_m = hybrids_highway.reduce((previousValue,currentValue)=>previousValue+currentValue)/hybrids_highway.length;
+        let non_hybrids_city = mpg_data.filter(x=>x["hybrid"]==false).filter(x=>x["year"]==l[i]).flatMap(x=>x["city_mpg"]);
+        var n_h_c_m = non_hybrids_city.reduce((previousValue,currentValue)=>previousValue+currentValue)/hybrids_city.length;
+        let non_hybrids_highway = mpg_data.filter(x=>x["hybrid"]==false).filter(x=>x["year"]==l[i]).flatMap(x=>x["highway_mpg"]);
+        var n_h_h_m = non_hybrids_highway.reduce((previousValue,currentValue)=>previousValue+currentValue)/hybrids_highway.length;
+        diff["hybrid"] = {"city": h_c_m, "highway": h_h_m};
+        diff["notHybrid"] = {"city": n_h_c_m, "highway": n_h_h_m};
+        r[l[i]] = diff;
+    }
+    return r;
+}
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: getMakerHybrids(),
+    avgMpgByYearAndHybrid: getAvgByYandH()
 };
