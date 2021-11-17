@@ -46,7 +46,7 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-    return car_data.filter(x=>x["id"].contains(searchTerm))
+    return car_data.filter(x=>x["id"].includes(searchTerm))
 }
 
 
@@ -59,5 +59,5 @@ export function searchName(car_data, searchTerm) {
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
-    car_data.filter(x=>years.contains(x["year"]))
+    car_data.filter(x=>years.includes(x["year"]))
 }
