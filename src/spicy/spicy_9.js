@@ -28,7 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-    repeat(console.log, 10, "Hello, World!");
+    repeat(console.log, 10, "Hello, world!");
 };
 
 
@@ -91,7 +91,7 @@ export const tenTimesFifty = () => {
  *    everyEven([1, 1, 0, 1, 1], x => x === 1)  <--  returns false
  */
 export const everyEven = (arr, test) => {
-    if(arr.filter(x=>test&&(arr.findIndex(x)%2==0)).length>=arr.length/2){
+    if(arr.filter(x=>test&&index%2==0).length>=arr.length/2){
         return true;
     }
     return false;
