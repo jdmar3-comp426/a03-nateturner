@@ -149,8 +149,7 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-    let a = arr.filter((x,i) => i%2===1);
-    let pass = a.filter(test);
+    let pass = arr.filter(test);
     let fail = arr.filter(x=>!pass.includes(x));
     return {"pass": pass , "fail": fail};
 };
@@ -183,7 +182,7 @@ export const anEvenIsOdd = (arr) => {
  *   pass the test. You must use the filter function.
  */
 export const hasExactly = (arr, test, n) => {
-    if(arr.filter(x=>test).length===n){
+    if(arr.filter(test).length===n){
         return true;
     }
     return false;
