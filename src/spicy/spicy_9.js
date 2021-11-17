@@ -28,7 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-    repeat(console.log, 10, "Hello World");
+    repeat(console.log, 10, "Hello World!");
 };
 
 
@@ -91,7 +91,7 @@ export const tenTimesFifty = () => {
  *    everyEven([1, 1, 0, 1, 1], x => x === 1)  <--  returns false
  */
 export const everyEven = (arr, test) => {
-    if(len(arr.filter(x=>test&&arr.findIndex(x)%2==0))>=arr.length/2){
+    if(arr.filter(x=>test&&arr.findIndex(x)%2==0).length>=arr.length/2){
         return true;
     }
     return false;
@@ -118,7 +118,7 @@ export const everyEven = (arr, test) => {
  *    someEven([0, 0, 0, 0, 0], x => x === 0)  <--  returns true
  */
 export const someEven = (arr, test) => {
-    if(len(arr.filter(x=>test&&arr.findIndex(x)%2==0))>0){
+    if(arr.filter(x=>test&&arr.findIndex(x)%2==0).length>0){
         return true;
     }
     return false;
@@ -159,10 +159,7 @@ export const filter = (arr, test) => {
  *   odd numbers. Use the "everyEven" function in this function.
  */
 export const allEvensAreOdd = (arr) => {
-    if(len(arr.filter(x=>x%2==1&&arr.findIndex(x)%2==0))>=arr.length/2){
-        return true;
-    }
-    return false;
+    return everyEven(arr, x%2==1);
 };
 
 
@@ -172,10 +169,7 @@ export const allEvensAreOdd = (arr) => {
  *   array is an odd number. Use the "someEven" function in this function.
  */
 export const anEvenIsOdd = (arr) => {
-    if(len(arr.filter(x=>x%2==1&&arr.findIndex(x)%2==0))>0){
-        return true;
-    }
-    return false;
+    return someEven(arr, x%2==1);
 };
 
 
@@ -186,7 +180,7 @@ export const anEvenIsOdd = (arr) => {
  *   pass the test. You must use the filter function.
  */
 export const hasExactly = (arr, test, n) => {
-    if(len(arr.filter(x=>text))==n){
+    if(arr.filter(x=>text).length==n){
         return true;
     }
     return false;
