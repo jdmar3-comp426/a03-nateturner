@@ -59,5 +59,5 @@ export function searchName(car_data, searchTerm) {
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
-    car_data.filter(x=>years.includes(x["year"]))
+    return car_data.filter(x=>years.includes(x["year"]))
 }
